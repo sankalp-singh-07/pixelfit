@@ -1,5 +1,7 @@
 import CategoryContainer from "../../category-container/category-container.component"
 
+
+
 const Home = () => {
 
   const category = [
