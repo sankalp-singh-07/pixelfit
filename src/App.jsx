@@ -1,18 +1,9 @@
 import { Routes, Route } from "react-router-dom" //> Routes is a map of all the route in the app and route is a single road of all the roads in routes which tells the app to load a component when a particular route is hit
 
-import { Outlet } from "react-router-dom" //> use krte hai iska uss jagah pe jaha pe hume child route ko render krna hai jo match ho jaye... child is the nested route inside the parent route
 
-
+import Nav from "../components/route/nav/nav.component"
 import Home from "../components/route/homepage/home.component"
 
-const Nav = () => {
-  return(
-    <>
-    <h1>Nav</h1>
-    <Outlet />
-    </>
-  )
-}
 
 
 const App = () => {
