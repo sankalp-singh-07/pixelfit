@@ -4,14 +4,14 @@ import { Link } from "react-router-dom" //> link works same as anchor tag but it
 
 import "./nav.styles.scss"
 
-import { ReactComponent as Logo } from "../../../src/assests/crown.svg" // importing svg as react component
+import Logo from './../../../src/assests/crown.svg' // importing svg as react component
 
 const Nav = () => {
     return(
       <>
       <div className="navigation">
-        <Link className="logo" to='/'>
-            <Logo className='logo' />
+        <Link className="logo-container" to='/'>
+            <img src={Logo} className="logo" />
         </Link>
         <div className="nav-links-container">
             <Link className='nav-link' to="/shop">Shop</Link>
