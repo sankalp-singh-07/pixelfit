@@ -6,6 +6,7 @@ import "./nav.styles.scss"
 
 import Logo from './../../../src/assests/crown.svg' // importing svg as react component
 
+
 const Nav = () => {
     return(
       <>
