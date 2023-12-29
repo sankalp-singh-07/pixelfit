@@ -3,7 +3,7 @@ import { Routes, Route } from "react-router-dom" //> Routes is a map of all the 
 
 import Nav from "../components/route/nav/nav.component"
 import Home from "../components/route/homepage/home.component"
-import SignIn from "../components/route/sign-in/sign-in.component"
+import Authentication from "../components/route/authentication/authentication.component"
 
 
 
@@ -13,7 +13,7 @@ const App = () => {
     <Routes>
       <Route path="/" element={<Nav />} > 
         <Route index element={<Home />} />
-        <Route path="sign-in" element={<SignIn />} />
+        <Route path="auth" element={<Authentication />} />
       </Route>
     </Routes>
     </>

@@ -20,11 +20,10 @@ const SignUpForm = () => {
 
 	const [userCredentials, setUserCredentials] = useState(dataFormsFields);
 	const {displayName, email, password, confirmationPassword} = userCredentials;
-	console.log(userCredentials); //> why console log the userCredentials here? because we want to see the changes in the state as we type in the input fields and the original dataFormsFields object is not changing because we are not changing the state of the dataFormsFields object but we are changing the state of the userCredentials object which is a copy of the dataFormsFields object
+	// console.log(userCredentials); //> why console log the userCredentials here? because we want to see the changes in the state as we type in the input fields and the original dataFormsFields object is not changing because we are not changing the state of the dataFormsFields object but we are changing the state of the userCredentials object which is a copy of the dataFormsFields object
 
 	const updateField = (e) => {
 		const {name, value} = e.target;
-		console.log(name, value);
 		setUserCredentials({...userCredentials, [name]: value});
 	}
 
@@ -51,8 +50,6 @@ const SignUpForm = () => {
 			}
 			else console.log("error we encountered: ", error.message);
 		}
-			
-			// const userRef = await createUserDocumentFromAuth(user);
 	}
 
 	return (
