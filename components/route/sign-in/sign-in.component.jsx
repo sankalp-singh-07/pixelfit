@@ -4,6 +4,8 @@ import {
 	createUserDocumentFromAuth,
 } from '../../../src/utils/firebase/firebase.utils.js';
 
+import SignUpForm from '../../sign-up-form/sign-up-form.component.jsx';
+
 const SignIn = () => {
 	const signInWithPopup = async () => {
 		const { user } = await signInWithGooglePopup(); //> user is the object we need that contains uid and we get from auth
@@ -14,6 +16,7 @@ const SignIn = () => {
 		<>
 			<h1>Sign In Page</h1>
 			<button onClick={signInWithPopup}>Sign in using Google</button>
+			<SignUpForm />
 		</>
 	);
 };
