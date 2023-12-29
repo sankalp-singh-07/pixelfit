@@ -6,6 +6,8 @@ import {
 import SignUpForm from '../../sign-up-form/sign-up-form.component.jsx';
 import SignInForm from '../../sign-in-form/sign-in-form.component.jsx';
 
+import './authentication.styles.scss';
+
 const Authentication = () => {
 	// const signInWithPopup = async () => {
 	// 	const { user } = await signInWithGooglePopup(); //> user is the object we need that contains uid and we get from auth and we do destructuring here because we need only user object from the returned object
@@ -13,11 +15,10 @@ const Authentication = () => {
 	// };
 
 	return (
-		<>
-			<h1>Sign In Page</h1>
+		<div className='authentication-container'>
 			<SignInForm />
 			<SignUpForm />
-		</>
+		</div>
 	);
 };
 
