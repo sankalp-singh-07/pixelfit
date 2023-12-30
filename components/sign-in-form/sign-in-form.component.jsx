@@ -36,7 +36,7 @@ const SignInForm = () => {
 		await signInWithGooglePopup();
 	};
 
-	// const { setCurrentUser } = useContext(UserContext);
+	// const { setCurrentUser } = useContext(UserContext); //>Why context and why not provider : Because we need to access the setCurrentUser function in this component and we can't do that if we wrap this component in a provider. We can only access the currentUser and setCurrentUser properties in the children components of the provider component. So we use context here.
 	// console.log(useContext(UserContext));
 
 	const handleSubmit = async(e) => {

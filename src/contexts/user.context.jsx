@@ -11,13 +11,13 @@ export const UserContext = createContext({
 
 export const UserProvider = ({ children }) => {
     const [currentUser, setCurrentUser] = useState(null);
-    const value = { currentUser, setCurrentUser };
+    const value = { currentUser, setCurrentUser }; //> value here is an object with two properties: currentUser and setCurrentUser
 
     useEffect(() => {
         const unsubscribe = onAuthStateChangedListener((user) => {
             if(user) createUserDocumentFromAuth(user); //> if user is not null then create a document for that user
             setCurrentUser(user);
-            console.log(user)
+            // console.log(user)
         });
         return unsubscribe; //> this is a cleanup function that will be called when the component unmounts mtlb jab component unmount hoga tab ye function call hoga usse pehle ye function call nahi hoga
     }, [])

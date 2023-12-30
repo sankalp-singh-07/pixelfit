@@ -4,6 +4,7 @@ import { Routes, Route } from "react-router-dom" //> Routes is a map of all the 
 import Nav from "../components/route/nav/nav.component"
 import Home from "../components/route/homepage/home.component"
 import Authentication from "../components/route/authentication/authentication.component"
+import Shop from "../components/route/shop/shop.component"
 
 
 
@@ -13,6 +14,7 @@ const App = () => {
     <Routes>
       <Route path="/" element={<Nav />} > 
         <Route index element={<Home />} />
+        <Route path='shop' element={<Shop />} />
         <Route path="auth" element={<Authentication />} />
       </Route>
     </Routes>
