@@ -10,7 +10,7 @@ import FormInput from '../form-input/form-input.component.jsx'
 
 import { createUserWithEmailAndPasswordInAuth , createUserDocumentFromAuth, signInAuthUserWithEmailAndPassword } from '../../src/utils/firebase/firebase.utils.js'
 
-import { UserContext } from '../../src/contexts/user.context.jsx'
+// import { UserContext } from '../../src/contexts/user.context.jsx'
 
 const dataFormsFields = {
 	email: '',
@@ -33,11 +33,10 @@ const SignInForm = () => {
 	}
 
 	const signInWithPopup = async () => {
-		const { user } = await signInWithGooglePopup(); 
-		await createUserDocumentFromAuth(user); 
+		await signInWithGooglePopup();
 	};
 
-	const { setCurrentUser } = useContext(UserContext);
+	// const { setCurrentUser } = useContext(UserContext);
 	// console.log(useContext(UserContext));
 
 	const handleSubmit = async(e) => {
@@ -46,7 +45,7 @@ const SignInForm = () => {
 		try {
 			const {user} = await signInAuthUserWithEmailAndPassword(email, password);
 			resetForm();
-			setCurrentUser(user);
+			// setCurrentUser(user);
 		} catch (error) {
 			switch (error.code) {
 				case "auth/user-not-found":

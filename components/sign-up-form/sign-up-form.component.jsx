@@ -1,5 +1,5 @@
 import { useContext, useState } from 'react';
-import { UserContext } from '../../src/contexts/user.context.jsx'
+// import { UserContext } from '../../src/contexts/user.context.jsx'
 
 import Button from '../button/button.component.jsx'
 
@@ -25,10 +25,10 @@ const SignUpForm = () => {
 
 
 	//!Only for education purpose
-	const var1 = useContext(UserContext);
+	// const var1 = useContext(UserContext);
 	// console.log("hit"); //>hit is logged 2 times because we are using useContext() hook mtlb react re-renders the component but it won't change anything as our return jsx doen't change with the var1 value
 
-	const { setCurrentUser } = var1;
+	// const { setCurrentUser } = var1;
 
 	const updateField = (e) => {
 		const {name, value} = e.target;
@@ -51,7 +51,7 @@ const SignUpForm = () => {
 			const {user} = await createUserWithEmailAndPasswordInAuth(email, password);
 
 			await createUserDocumentFromAuth(user, {displayName})
-			setCurrentUser(user);
+			// setCurrentUser(user);
 			resetForm();
 		} catch (error) {
 			if(error.code === "auth/email-already-in-use") {
