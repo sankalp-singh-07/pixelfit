@@ -1,4 +1,5 @@
-import { useState } from 'react';
+import { useContext, useState } from 'react';
+import { UserContext } from '../../src/contexts/user.context.jsx'
 
 import Button from '../button/button.component.jsx'
 
@@ -22,6 +23,13 @@ const SignUpForm = () => {
 	const {displayName, email, password, confirmationPassword} = userCredentials;
 	// console.log(userCredentials); //> why console log the userCredentials here? because we want to see the changes in the state as we type in the input fields and the original dataFormsFields object is not changing because we are not changing the state of the dataFormsFields object but we are changing the state of the userCredentials object which is a copy of the dataFormsFields object
 
+
+	//!Only for education purpose
+	const var1 = useContext(UserContext);
+	// console.log("hit"); //>hit is logged 2 times because we are using useContext() hook mtlb react re-renders the component but it won't change anything as our return jsx doen't change with the var1 value
+
+	const { setCurrentUser } = var1;
+
 	const updateField = (e) => {
 		const {name, value} = e.target;
 		setUserCredentials({...userCredentials, [name]: value});
@@ -43,6 +51,7 @@ const SignUpForm = () => {
 			const {user} = await createUserWithEmailAndPasswordInAuth(email, password);
 
 			await createUserDocumentFromAuth(user, {displayName})
+			setCurrentUser(user);
 			resetForm();
 		} catch (error) {
 			if(error.code === "auth/email-already-in-use") {

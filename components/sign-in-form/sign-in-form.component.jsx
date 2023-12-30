@@ -38,7 +38,7 @@ const SignInForm = () => {
 	};
 
 	const { setCurrentUser } = useContext(UserContext);
-	console.log(useContext(UserContext));
+	// console.log(useContext(UserContext));
 
 	const handleSubmit = async(e) => {
 		e.preventDefault();

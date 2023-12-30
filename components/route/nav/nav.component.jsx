@@ -1,5 +1,7 @@
-import { useContext } from "react"
-import { UserContext } from "./../../../src/contexts/user.context.jsx"
+import { useContext } from "react";
+import { UserContext } from "./../../../src/contexts/user.context.jsx";
+
+import { signOutAuthUser } from "./../../../src/utils/firebase/firebase.utils";
 
 import { Outlet } from "react-router-dom" //> use krte hai iska uss jagah pe jaha pe hume child route ko render krna hai jo match ho jaye... child is the nested route inside the parent route
 
@@ -11,8 +13,14 @@ import Logo from './../../../src/assests/crown.svg' // importing svg as react co
 
 
 const Nav = () => {
-  const { currentUser } = useContext(UserContext);
-  console.log(currentUser);
+  const { currentUser, setCurrentUser } = useContext(UserContext);
+  // console.log(currentUser);
+
+  const signOutAuthUserHandler = async () => {
+    await signOutAuthUser() //> Signs out
+    //> Now change the context to null as there are no one currently logged in
+    setCurrentUser(null);
+  }
 
     return(
       <>
@@ -22,7 +30,7 @@ const Nav = () => {
         </Link>
         <div className="nav-links-container">
             <Link className='nav-link' to="/shop">Shop</Link>
-            <Link className='nav-link' to="/auth">Sign In</Link>
+            {currentUser ? (<Link className="nav-link" onClick={signOutAuthUserHandler}>Sign Out</Link>) : (<Link className='nav-link' to="/auth">Sign In</Link>)}
         </div>
       </div>
       <Outlet />
