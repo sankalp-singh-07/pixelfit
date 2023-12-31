@@ -4,6 +4,7 @@ import { BrowserRouter } from 'react-router-dom' //> BrowserRouter keeps UI in s
 import App from './App.jsx'
 import { UserProvider } from '../src/contexts/user.context.jsx'
 import { ProductsProvider } from '../src/contexts/products.context.jsx'
+import { CartProvider } from '../src/contexts/cart.context.jsx'
 import './index.scss'
 
 ReactDOM.createRoot(document.getElementById('root')).render(
@@ -11,7 +12,9 @@ ReactDOM.createRoot(document.getElementById('root')).render(
   <BrowserRouter>
     <UserProvider>
       <ProductsProvider>
-        <App />
+        <CartProvider>
+          <App />
+        </CartProvider>
       </ProductsProvider>
     </UserProvider>
   </BrowserRouter>

@@ -1,5 +1,6 @@
 import { useContext } from "react";
 import { UserContext } from "./../../../src/contexts/user.context.jsx";
+import { CartContext } from "../../../src/contexts/cart.context.jsx";
 
 import { signOutAuthUser } from "./../../../src/utils/firebase/firebase.utils";
 
@@ -12,9 +13,11 @@ import "./nav.styles.scss"
 import Logo from './../../../src/assests/crown.svg' // importing svg as a component
 
 import CartIcon from "../../cart-icon/cart-icon.component.jsx";
+import CartDropdown from "../../cart-dropdown/cart-dropdown.component.jsx";
 
 const Nav = () => {
   const { currentUser, setCurrentUser } = useContext(UserContext);
+  const { cartDropdownOpen, setCartDropdownOpen } = useContext(CartContext);
   // console.log(currentUser);
 
   // const signOutAuthUserHandler = async () => {
@@ -34,6 +37,7 @@ const Nav = () => {
             {currentUser ? (<Link className="nav-link" onClick={signOutAuthUser}>Sign Out</Link>) : (<Link className='nav-link' to="/auth">Sign In</Link>)}
             <CartIcon />
         </div>
+        {cartDropdownOpen && <CartDropdown />}
       </div>
       <Outlet />
       </>
