@@ -9,8 +9,9 @@ import { Link } from "react-router-dom" //> link works same as anchor tag but it
 
 import "./nav.styles.scss"
 
-import Logo from './../../../src/assests/crown.svg' // importing svg as react component
+import Logo from './../../../src/assests/crown.svg' // importing svg as a component
 
+import CartIcon from "../../cart-icon/cart-icon.component.jsx";
 
 const Nav = () => {
   const { currentUser, setCurrentUser } = useContext(UserContext);
@@ -31,6 +32,7 @@ const Nav = () => {
         <div className="nav-links-container">
             <Link className='nav-link' to="/shop">Shop</Link>
             {currentUser ? (<Link className="nav-link" onClick={signOutAuthUser}>Sign Out</Link>) : (<Link className='nav-link' to="/auth">Sign In</Link>)}
+            <CartIcon />
         </div>
       </div>
       <Outlet />
