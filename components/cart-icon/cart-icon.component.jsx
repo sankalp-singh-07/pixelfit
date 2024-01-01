@@ -4,7 +4,7 @@ import { useContext } from 'react'
 import { CartContext } from '../../src/contexts/cart.context'
 
 const CartIcon = () => {
-    const { cartDropdownOpen, setCartDropdownOpen } = useContext(CartContext);
+    const { cartDropdownOpen, setCartDropdownOpen, cartIconCount } = useContext(CartContext);
 
     //> Toggle function : agar cartDropdownOpen true hai toh false krdo and vice versa on click
     const toggleCartDropdownOpen = () => setCartDropdownOpen(!cartDropdownOpen)
@@ -12,7 +12,7 @@ const CartIcon = () => {
     return(
         <div className="cart-icon-container" onClick={toggleCartDropdownOpen}>
             <img src={ShoppingIcon} className="shopping-icon" />
-            <span className="item-count">0</span>
+            <span className="item-count">{cartIconCount}</span>
         </div>
     )
 }
