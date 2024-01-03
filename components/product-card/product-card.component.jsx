@@ -6,9 +6,8 @@ import './product-card.styles.scss';
 
 const ProductCard = ( {product} ) => {
     const {name, price, imageUrl} = product;
-    const { addItemToCart, setCartIconCount, cartIconCount } = useContext(CartContext)
+    const { addItemToCart} = useContext(CartContext)
     const addProductToCart = () => {
-        setCartIconCount(cartIconCount + 1)
         return addItemToCart(product)
     }
     return(
