@@ -3,12 +3,12 @@ import { addCollectionAndDocuments, getCategoriesAndDocuments } from "../utils/f
 // import SHOP_DATA from "../shop-data/shop-data.js"
 
 
-export const ProductsContext = createContext({
-    products: [],
+export const CategoriesContext = createContext({
+    categoriesMap: {},
 })
 
-export const ProductsProvider = ({children}) => {
-    const [products, setProducts] = useState([]);
+export const CategoriesProvider = ({children}) => {
+    const [categoriesMap, setCategoriesMap] = useState({});
     
     // useEffect(() => {
     //     addCollectionAndDocuments('categories', SHOP_DATA);
@@ -17,17 +17,17 @@ export const ProductsProvider = ({children}) => {
     useEffect(() => {
         const fetchProducts = async () => {
             const categoryMap = await getCategoriesAndDocuments();
-            console.log(categoryMap);
+            setCategoriesMap(categoryMap);
         }
         fetchProducts();
     }, []) 
     //> VERY IMPORTANT : we never use async await in useEffect directly ... we always use it inside a function and then call that function inside useEffect ... this is bcoz useEffect is a synchronous function and async await is asynchronous ... so if we use async await directly inside useEffect then useEffect will not wait for the async await to finish and will move on to the next line of code ... so we use async await inside a function and then call that function inside useEffect ... this way useEffect will wait for the async await to finish and then move on to the next line of code
 
-    const value = {products};
+    const value = {categoriesMap};
     
     return(
-        <ProductsContext.Provider value={value}>
+        <CategoriesContext.Provider value={value}>
             {children}
-        </ProductsContext.Provider>
+        </CategoriesContext.Provider>
     )
 }

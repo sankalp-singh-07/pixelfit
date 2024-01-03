@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom/client'
 import { BrowserRouter } from 'react-router-dom' //> BrowserRouter keeps UI in sync with URL
 import App from './App.jsx'
 import { UserProvider } from '../src/contexts/user.context.jsx'
-import { ProductsProvider } from '../src/contexts/products.context.jsx'
+import { CategoriesProvider } from '../src/contexts/categories.context.jsx'
 import { CartProvider } from '../src/contexts/cart.context.jsx'
 import './index.scss'
 
@@ -11,11 +11,11 @@ ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
   <BrowserRouter>
     <UserProvider>
-      <ProductsProvider>
+      <CategoriesProvider>
         <CartProvider>
           <App />
         </CartProvider>
-      </ProductsProvider>
+      </CategoriesProvider>
     </UserProvider>
   </BrowserRouter>
   </React.StrictMode>,
