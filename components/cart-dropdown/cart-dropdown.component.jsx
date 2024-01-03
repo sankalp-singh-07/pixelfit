@@ -1,7 +1,6 @@
 import { useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { CartContext } from '../../src/contexts/cart.context';
-import { CheckoutContext } from '../../src/contexts/checkout.context';
 import Button from '../button/button.component';
 import CartItem from '../cart-item/cart-item.component'
 import './cart-dropdown.styles.scss'
@@ -14,10 +13,6 @@ const CartDropdown = () => {
         navigate('/checkout'); //> navigate is a function which takes a route as an argument and navigates to that route
     }
 
-
-    const {setCheckoutItems} = useContext(CheckoutContext)
-    
-    // console.log(cartItems);
     return(
         <div className='cart-dropdown-container'>
             <div className="cart-items">
