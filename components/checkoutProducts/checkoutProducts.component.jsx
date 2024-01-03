@@ -1,29 +1,32 @@
-import './checkoutProducts.styles.scss'
-import { useContext } from 'react';
-import {CheckoutContext} from '../../src/contexts/checkout.context'
+import './checkoutProducts.styles.scss';
 
-const CheckoutProducts = ({items}) => {
-    const {name,id,quantity,price, imageUrl} = items;
-    const {decrement, increment, cross, total} = useContext(CheckoutContext);
-    const decreaseQuantity = () => decrement(items)
-    const increaseQuantity = () => increment(items)
-    const crossQuantity = () => cross(items)
-    // console.log(items);
+import { useContext } from 'react';
+
+import { CartContext } from '../../src/contexts/cart.context';
+
+const CheckoutProducts = ({cartItem}) => {
+    const {name,quantity,price, imageUrl} = cartItem;
+
+    const {clearItemFromCart, addItemToCart, removeItemToCart} = useContext(CartContext);
+
+    const clearTheItem = () => clearItemFromCart(cartItem);
+    const addTheItem = () => addItemToCart(cartItem);
+    const removeTheItem = () => removeItemToCart(cartItem);
 
     return(
-        <div key={id}>
+        <div className='checkout-item-container'>
+        <div className='image-container'>
             <img src={imageUrl} alt={`${name}`}/>
-            <h3>{name}</h3>
-            <div>
-            <button onClick={decreaseQuantity} key={id}>⬅</button>
-                <h3>{quantity}</h3>
-            <button onClick={increaseQuantity}>➡</button>
-            </div>
-            <h3>{price * quantity}</h3>
-            <button onClick={crossQuantity} key={id}>X</button>
-            <div>
-                <span>{total}</span>
-            </div>
+        </div>
+        <span className='name'>{name}</span>
+        <span className='quantity'>
+        <div className='arrow' onClick={removeTheItem}>&#10094;</div>
+        <span className='value'>{quantity}</span>
+        <div className='arrow' onClick={addTheItem}>&#10095;</div>
+        <div></div>
+        </span>
+        <span className='price'>{price}</span>
+        <div className='remove-button' onClick={clearTheItem}>&#10005;</div>
         </div>
     )
 }

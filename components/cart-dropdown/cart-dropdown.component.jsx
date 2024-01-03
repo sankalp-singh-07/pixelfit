@@ -1,16 +1,21 @@
 import { useContext } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { CartContext } from '../../src/contexts/cart.context';
 import { CheckoutContext } from '../../src/contexts/checkout.context';
 import Button from '../button/button.component';
 import CartItem from '../cart-item/cart-item.component'
 import './cart-dropdown.styles.scss'
-import { Link } from 'react-router-dom';
-import { useEffect } from 'react';
 
 const CartDropdown = () => {
     const { cartItems } = useContext(CartContext)
+
+    const navigate = useNavigate(); //> useNavigate is a hook which is used to navigate to a particular route
+    const goToCheckout = () => {
+        navigate('/checkout'); //> navigate is a function which takes a route as an argument and navigates to that route
+    }
+
+
     const {setCheckoutItems} = useContext(CheckoutContext)
-    useEffect(() => setCheckoutItems(cartItems), [cartItems])
     
     // console.log(cartItems);
     return(
@@ -18,7 +23,7 @@ const CartDropdown = () => {
             <div className="cart-items">
                 {cartItems.map(item => <CartItem key={item?.id} cartItem={item}/>)}
             </div>
-            <Button><Link className='font-go-to-checkout' to='/checkout'>GO TO CHECKOUT</Link></Button>
+            <Button onClick={goToCheckout}><span className='font-go-to-checkout'>GO TO CHECKOUT</span></Button>
         </div>
     )
 }
