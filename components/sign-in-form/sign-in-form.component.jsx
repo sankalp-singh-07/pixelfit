@@ -2,7 +2,7 @@ import { useState, useContext } from 'react';
 
 import { signInWithGooglePopup } from '../../src/utils/firebase/firebase.utils.js';
 
-import Button from '../button/button.component.jsx'
+import Button, {BUTTON_TYPE_CLASSES} from '../button/button.component.jsx'
 
 import {SignInContainer, AlreadyHaveAccount, ButtonsContainer} from './sign-in-form.styles.jsx'
 
@@ -72,7 +72,7 @@ const SignInForm = () => {
 
 			<ButtonsContainer>
 				<Button type='submit'>Sign In</Button>
-				<Button type='button' onClick={signInWithGooglePopup} buttonType='google'>Sign In With Google</Button>
+				<Button type='button' onClick={signInWithGooglePopup} buttonType={BUTTON_TYPE_CLASSES.google}>Sign In With Google</Button>
 			</ButtonsContainer>
 
 			</form>
