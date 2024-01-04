@@ -15,11 +15,14 @@ const Category = () => {
     }, [category, categoriesMap])
 
     return (
+        <>
+        <h2 className='category-title'>{category.toUpperCase()}</h2>
         <div className='category-container'>
             { //> why we use && here bcoz we want to check if products is not null or undefined, if it is then we don't want to map over it and avoid getting an error... we get error bcoz jab render hota hai toh initially products null hota hai kyuki categoriesMap null hota hai initially
                 products && products.map((product) => <ProductCard key={product.id} product={product}/>)
             }
         </div>
+        </>
     )
 }
 
