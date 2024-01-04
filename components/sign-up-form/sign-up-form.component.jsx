@@ -3,7 +3,7 @@ import { useContext, useState } from 'react';
 
 import Button from '../button/button.component.jsx'
 
-import '../sign-up-form/sign-up-form.styles.scss'
+import {SignUpContainer, NoAccHeading} from './sign-up-form.styles.jsx'
 
 import FormInput from '../form-input/form-input.component.jsx'
 
@@ -62,8 +62,8 @@ const SignUpForm = () => {
 	}
 
 	return (
-		<div className='sign-up-container'>
-			<h2>Don't have an account?</h2>
+		<SignUpContainer>
+			<NoAccHeading>Don't have an account?</NoAccHeading>
 			<span>Sign up with your email and password</span>
 			<form onSubmit={ handleSubmit }>
 				<FormInput label='Display Name' type='text' required name='displayName' value={displayName} onChange={updateField}/>
@@ -76,7 +76,7 @@ const SignUpForm = () => {
 
 				<Button type='submit'>Sign Up</Button>
 			</form>
-		</div>
+		</SignUpContainer>
 	);
 };
 
