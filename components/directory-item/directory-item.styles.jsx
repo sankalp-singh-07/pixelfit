@@ -5,7 +5,7 @@ export const BackgroundImage = styled.div`
   height: 100%;
   background-size: cover;
   background-position: center;
-  background-image: ${({ imageUrl}) => `url(${imageUrl})`}
+  background-image: ${({ imageurl}) => `url(${imageurl})`}
 `;
 // we can use the above code to dynamically render background images as it works as a component that takes in props and returns a background image with the url of the image passed in as a prop
 
