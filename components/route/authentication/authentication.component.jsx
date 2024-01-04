@@ -6,7 +6,7 @@ import {
 import SignUpForm from '../../sign-up-form/sign-up-form.component.jsx';
 import SignInForm from '../../sign-in-form/sign-in-form.component.jsx';
 
-import './authentication.styles.scss';
+import {AuthenticationContainer} from './authentication.styles.jsx';
 
 const Authentication = () => {
 	// const signInWithPopup = async () => {
@@ -15,10 +15,10 @@ const Authentication = () => {
 	// };
 
 	return (
-		<div className='authentication-container'>
+		<AuthenticationContainer>
 			<SignInForm />
 			<SignUpForm />
-		</div>
+		</AuthenticationContainer>
 	);
 };
 

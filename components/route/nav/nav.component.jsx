@@ -8,7 +8,7 @@ import { Outlet } from "react-router-dom" //> use krte hai iska uss jagah pe jah
 
 import { Link } from "react-router-dom" //> link works same as anchor tag but it does not reload the page when clicked and works for routing
 
-import "./nav.styles.scss"
+import {NavContainer, LogoContainer, NavLinks, NavLink} from "./nav.styles.jsx"
 
 import Logo from './../../../src/assests/crown.svg' // importing svg as a component
 
@@ -28,17 +28,17 @@ const Nav = () => {
 
     return(
       <>
-      <div className="navigation">
-        <Link className="logo-container" to='/'>
+      <NavContainer>
+        <LogoContainer to='/'>
             <img src={Logo} className="logo" />
-        </Link>
-        <div className="nav-links-container">
-            <Link className='nav-link' to="/shop">Shop</Link>
-            {currentUser ? (<Link className="nav-link" onClick={signOutAuthUser}>Sign Out</Link>) : (<Link className='nav-link' to="/auth">Sign In</Link>)}
+        </LogoContainer>
+        <NavLinks>
+            <NavLink to="/shop">Shop</NavLink>
+            {currentUser ? (<NavLink onClick={signOutAuthUser}>Sign Out</NavLink>) : (<NavLink to="/auth">Sign In</NavLink>)}
             <CartIcon />
-        </div>
+        </NavLinks>
         {cartDropdownOpen && <CartDropdown />}
-      </div>
+      </NavContainer>
       <Outlet />
       </>
     )
