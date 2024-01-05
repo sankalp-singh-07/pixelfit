@@ -1,4 +1,4 @@
-import { createContext, useState, useEffect } from 'react';
+import { createContext, useState, useEffect, useReducer } from 'react';
 import { onAuthStateChangedListener, createUserDocumentFromAuth } from '../utils/firebase/firebase.utils';
 
 
@@ -6,20 +6,58 @@ export const UserContext = createContext({
     currentUser: null,
     setCurrentUser: () => null,
 });
-//> createContext() is a function that creates a new context object. It accepts an optional parameter which is the default value of the context object. Default value is used when there is no matching Provider above the component tree mtlb koi bhi component Provider ke andar nahi hai toh default value use hoga.
-//? Default value = If a component tries to consume UserContext but isn't wrapped in a UserProvider, it will receive this default value 
+
+export const User_ACTION_TYPES = {
+    SET_CURRENT_USER: 'SET_CURRENT_USER'
+} //> this object is what we will use to update the state in the reducer
+
+const userReducer = (state, action) => {
+    //> the state in the parameter:  The current state of the reducer. Initially, this will be INITIAL_STATE.
+    console.log(action);
+    console.log(state);
+    console.log('dispatch');
+    console.log(INITIAL_STATE);
+    const {type, payload} = action; //> destructuring the action object where type is the action type and payload is the data we want to update the state with
+
+    switch (type) {
+        case User_ACTION_TYPES.SET_CURRENT_USER:
+            return{
+                ...state,
+                currentUser: payload
+            } //> we destructure the state object bcoz we want to update only the currentUser property and not the entire state object ... what is state object here: {currentUser: null} ... here it has only one property but in a bigger app it will have many properties and we want to update only the currentUser property
+            break;
+    
+        default:
+            throw new Error(`Unhandled type ${type} in userReducer`);
+            break;
+    }
+}
+
+const INITIAL_STATE = {
+    currentUser: null,
+} //> this is the initial state of the reducer ... we will pass this as the second argument to the useReducer hook
 
 export const UserProvider = ({ children }) => {
-    const [currentUser, setCurrentUser] = useState(null);
-    const value = { currentUser, setCurrentUser }; //> value here is an object with two properties: currentUser and setCurrentUser
+    // const [state, dispatch] = useReducer(userReducer, INITIAL_STATE); //> here dispatch is a function that we will use to update the state ... we will pass the action object to this function and it will update the state based on the action type and payload ...... the state here is the INITIAL_STATE object that we passed as the second argument to the useReducer hook and it gets updated based on the action object that we pass to the dispatch function
 
+    const [{currentUser}, dispatch] = useReducer(userReducer, INITIAL_STATE); //> as useReducer returns current state we can destructure the state object and get the currentUser property from it ... initially the currentUser property will be null and it will get updated based on the action object that we pass to the dispatch function
+    console.log(currentUser);
+    console.log(dispatch);
+
+    const setCurrentUser = (user) => {
+        dispatch({
+            type: User_ACTION_TYPES.SET_CURRENT_USER,
+            payload: user
+        })
+    }
+
+    const value = { currentUser, setCurrentUser }; 
     useEffect(() => {
         const unsubscribe = onAuthStateChangedListener((user) => {
-            if(user) createUserDocumentFromAuth(user); //> if user is not null then create a document for that user
+            if(user) createUserDocumentFromAuth(user);
             setCurrentUser(user);
-            // console.log(user)
         });
-        return unsubscribe; //> this is a cleanup function that will be called when the component unmounts mtlb jab component unmount hoga tab ye function call hoga usse pehle ye function call nahi hoga
+        return unsubscribe; 
     }, [])
 
     return (
@@ -28,4 +66,3 @@ export const UserProvider = ({ children }) => {
         </UserContext.Provider>
     );
 }
-//> UseContext.Provider is a component that provides the value to all the children components that are wrapped inside it. UserContext returns an object with two properties: currentUser and setCurrentUser. We are passing this object as a value to the Provider component. This means that all the children components of the Provider component will have access to the currentUser and setCurrentUser properties.
