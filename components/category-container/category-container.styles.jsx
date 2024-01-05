@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-export const CategoryContainer = styled.div`
+export const CategoryContainerStyles = styled.div`
   width: 100%;
   display: flex;
   flex-wrap: wrap;
