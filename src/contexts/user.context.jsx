@@ -1,4 +1,4 @@
-import { createContext, useState, useEffect, useReducer } from 'react';
+import { createContext, useEffect, useReducer } from 'react';
 import { onAuthStateChangedListener, createUserDocumentFromAuth } from '../utils/firebase/firebase.utils';
 
 
@@ -13,10 +13,10 @@ export const User_ACTION_TYPES = {
 
 const userReducer = (state, action) => {
     //> the state in the parameter:  The current state of the reducer. Initially, this will be INITIAL_STATE.
-    console.log(action);
-    console.log(state);
-    console.log('dispatch');
-    console.log(INITIAL_STATE);
+    // console.log(action);
+    // console.log(state);
+    // console.log('dispatch');
+    // console.log(INITIAL_STATE);
     const {type, payload} = action; //> destructuring the action object where type is the action type and payload is the data we want to update the state with
 
     switch (type) {
@@ -41,8 +41,8 @@ export const UserProvider = ({ children }) => {
     // const [state, dispatch] = useReducer(userReducer, INITIAL_STATE); //> here dispatch is a function that we will use to update the state ... we will pass the action object to this function and it will update the state based on the action type and payload ...... the state here is the INITIAL_STATE object that we passed as the second argument to the useReducer hook and it gets updated based on the action object that we pass to the dispatch function
 
     const [{currentUser}, dispatch] = useReducer(userReducer, INITIAL_STATE); //> as useReducer returns current state we can destructure the state object and get the currentUser property from it ... initially the currentUser property will be null and it will get updated based on the action object that we pass to the dispatch function
-    console.log(currentUser);
-    console.log(dispatch);
+    // console.log(currentUser);
+    // console.log(dispatch);
 
     const setCurrentUser = (user) => {
         dispatch({
