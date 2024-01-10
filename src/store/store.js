@@ -9,6 +9,23 @@ import logger from 'redux-logger'; //> allows us to see what the state looks lik
 
 import { rootReducer } from './root-reducer';
 
+// creating our own middleware logger using curryimg function logic
+// const loggerMiddleware = store => next => action => {
+//     if(!action.type) {
+//         return 
+//     }
+
+//     console.log('type : ', action.type);
+//     console.log('payload : ', action.payload);
+//     console.log('currentState : ', store.getState());
+
+//     next(action);
+
+//     console.log('nextState : ', store.getState());
+// }
+
+const middleWaresbyUs = [loggerMiddleware];
+
 
 const middleWares = [logger]; //> middlewares runs before an action reaches the root reducer which helps us to catch the action and display it
 
