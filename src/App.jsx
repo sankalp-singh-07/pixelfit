@@ -1,10 +1,13 @@
 import { Routes, Route } from "react-router-dom" //> Routes is a map of all the route in the app and route is a single road of all the roads in routes which tells the app to load a component when a particular route is hit
 
+import { getCategoriesAndDocuments } from '../src/utils/firebase/firebase.utils'
+
 import { useDispatch } from "react-redux"
 
 import { useEffect } from "react"
 import { onAuthStateChangedListener, createUserDocumentFromAuth } from './utils/firebase/firebase.utils'
 import { setCurrentUser } from "./store/user/user.action"
+import { setCategoriesMap } from "./store/categories/category.action"
 
 
 import Nav from "../components/route/nav/nav.component"
@@ -26,6 +29,16 @@ const App = () => {
       });
       return unsubscribe; 
   }, []);
+
+//> set in shop component in the course(bcoz only its children needs it) but we set it here bcoz we want to provide it to everyone
+  useEffect(() => {
+    const fetchProducts = async () => {
+        const categoryMap = await getCategoriesAndDocuments();
+        dispatch(setCategoriesMap(categoryMap));
+    }
+    fetchProducts();
+  }, []) 
+
 
   return(
     <>

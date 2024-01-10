@@ -1,12 +1,17 @@
 import {CategoryContainer, CategoryTitle} from './category.styles.jsx'
 import { useParams } from 'react-router-dom' //> useParams is a hook that allows us to access the parameters of the current route
 import { useContext, useEffect, useState } from 'react'
-import { CategoriesContext } from '../../../src/contexts/categories.context'
+// import { CategoriesContext } from '../../../src/contexts/categories.context'
+
+import { useSelector } from 'react-redux'
+
 import ProductCard from '../../product-card/product-card.component'
 
 const Category = () => {
     const {category} = useParams(); //> useParams returns an object of key/value pairs of URL parameters
-    const { categoriesMap } = useContext(CategoriesContext);
+    // const { categoriesMap } = useContext(CategoriesContext);
+
+    const categoriesMap = useSelector(state => state.categories.categoriesMap)
 
     const [products, setProducts] = useState(categoriesMap[category]);
 
