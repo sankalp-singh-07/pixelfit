@@ -4,6 +4,7 @@ import { useContext, useEffect, useState } from 'react'
 // import { CategoriesContext } from '../../../src/contexts/categories.context'
 
 import { useSelector } from 'react-redux'
+import { selectCategoriesMap } from '../../../src/store/categories/category.selector.js'
 
 import ProductCard from '../../product-card/product-card.component'
 
@@ -11,7 +12,7 @@ const Category = () => {
     const {category} = useParams(); //> useParams returns an object of key/value pairs of URL parameters
     // const { categoriesMap } = useContext(CategoriesContext);
 
-    const categoriesMap = useSelector(state => state.categories.categoriesMap)
+    const categoriesMap = useSelector(selectCategoriesMap)
 
     const [products, setProducts] = useState(categoriesMap[category]);
 

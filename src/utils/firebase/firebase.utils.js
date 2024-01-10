@@ -112,11 +112,15 @@ export const getCategoriesAndDocuments = async () => {
 
 	const querySnapshot = await getDocs(q); //> querySnapshot is the snapshot of the data in firestore database with the query q ... getDocs is a method that takes q and returns the snapshot of the data in firestore database with the query q
 
-	const categoryMap = querySnapshot.docs.reduce((acc, doc) => {
-		const { title, items } = doc.data();
-		acc[title.toLowerCase()] = items;
-		return acc;
-	}, {}) //>querysnapshot.docs is an array of documents in firestore database with the query q and reduce is used to convert that array into an object
+	// const categoryMap = querySnapshot.docs.map(doc => doc.data())
+	return querySnapshot.docs.map(doc => doc.data())
+	
+	// .reduce((acc, doc) => {
+	// 	const { title, items } = doc.data();
+	// 	acc[title.toLowerCase()] = items;
+	// 	return acc;
+	// }, {}) //>querysnapshot.docs is an array of documents in firestore database with the query q and reduce is used to convert that array into an object
 
-	return categoryMap;
-}
+	// return categoryMap;
+} 
+//> commenting the reduce so that we can get the array to store in redux

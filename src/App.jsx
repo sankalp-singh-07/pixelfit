@@ -7,7 +7,7 @@ import { useDispatch } from "react-redux"
 import { useEffect } from "react"
 import { onAuthStateChangedListener, createUserDocumentFromAuth } from './utils/firebase/firebase.utils'
 import { setCurrentUser } from "./store/user/user.action"
-import { setCategoriesMap } from "./store/categories/category.action"
+import { setCategories } from "./store/categories/category.action"
 
 
 import Nav from "../components/route/nav/nav.component"
@@ -33,8 +33,9 @@ const App = () => {
 //> set in shop component in the course(bcoz only its children needs it) but we set it here bcoz we want to provide it to everyone
   useEffect(() => {
     const fetchProducts = async () => {
-        const categoryMap = await getCategoriesAndDocuments();
-        dispatch(setCategoriesMap(categoryMap));
+        const categoryArray = await getCategoriesAndDocuments();
+        // console.log(categoryArray);
+        dispatch(setCategories(categoryArray));
     }
     fetchProducts();
   }, []) 
