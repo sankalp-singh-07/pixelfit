@@ -1,5 +1,11 @@
 import { Routes, Route } from "react-router-dom" //> Routes is a map of all the route in the app and route is a single road of all the roads in routes which tells the app to load a component when a particular route is hit
 
+import { useDispatch } from "react-redux"
+
+import { useEffect } from "react"
+import { onAuthStateChangedListener, createUserDocumentFromAuth } from './utils/firebase/firebase.utils'
+import { setCurrentUser } from "./store/user/user.action"
+
 
 import Nav from "../components/route/nav/nav.component"
 import Home from "../components/route/homepage/home.component"
@@ -10,6 +16,17 @@ import Checkout from "../components/route/checkout/checkout.component"
 
 
 const App = () => {
+
+  const dispatch = useDispatch();
+  
+  useEffect(() => {
+      const unsubscribe = onAuthStateChangedListener((user) => {
+          if(user) createUserDocumentFromAuth(user);
+          dispatch(setCurrentUser(user));
+      });
+      return unsubscribe; 
+  }, []);
+
   return(
     <>
     <Routes>

@@ -2,6 +2,11 @@ import { useContext } from "react";
 import { UserContext } from "./../../../src/contexts/user.context.jsx";
 import { CartContext } from "../../../src/contexts/cart.context.jsx";
 
+//? import data from redux
+import { useSelector } from "react-redux"; //> store is an object with many reducers and we can use useSelector hook to get the state from the store object ... we use selector function to get the state from the store object ... we pass the selector function to the useSelector hook and it returns the state from the store object ... we can use this hook multiple times to get different states from the store object
+
+import { selectCurrentUser } from '../../../src/store/user/user.selector'
+
 import { signOutAuthUser } from "./../../../src/utils/firebase/firebase.utils";
 
 import { Outlet } from "react-router-dom" //> use krte hai iska uss jagah pe jaha pe hume child route ko render krna hai jo match ho jaye... child is the nested route inside the parent route
@@ -16,7 +21,11 @@ import CartIcon from "../../cart-icon/cart-icon.component.jsx";
 import CartDropdown from "../../cart-dropdown/cart-dropdown.component.jsx";
 
 const Nav = () => {
-  const { currentUser, setCurrentUser } = useContext(UserContext);
+  // const { currentUser } = useContext(UserContext);
+
+  //> using redux instead of context
+  const currentUser = useSelector(selectCurrentUser)
+
   const { cartDropdownOpen, setCartDropdownOpen } = useContext(CartContext);
   // console.log(currentUser);
 

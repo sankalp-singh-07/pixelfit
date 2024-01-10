@@ -1,0 +1,1 @@
+export const createAction = (type, payload) => ({type,payload}) //> this is a function that returns an action object with type and payload properties ... we will use this function to create action objects in our action creators
