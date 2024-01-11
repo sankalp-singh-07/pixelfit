@@ -24,7 +24,7 @@ import { rootReducer } from './root-reducer';
 //     console.log('nextState : ', store.getState());
 // }
 
-const middleWaresbyUs = [loggerMiddleware];
+// const middleWaresbyUs = [loggerMiddleware];
 
 
 const middleWares = [logger]; //> middlewares runs before an action reaches the root reducer which helps us to catch the action and display it
