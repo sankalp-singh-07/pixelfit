@@ -5,6 +5,8 @@ import { CartContext } from "../../../src/contexts/cart.context.jsx";
 //? import data from redux
 import { useSelector } from "react-redux"; //> store is an object with many reducers and we can use useSelector hook to get the state from the store object ... we use selector function to get the state from the store object ... we pass the selector function to the useSelector hook and it returns the state from the store object ... we can use this hook multiple times to get different states from the store object
 
+import { selectCartDropdownOpen } from "../../../src/store/cart/cart.selector.js";
+
 import { selectCurrentUser } from '../../../src/store/user/user.selector'
 
 import { signOutAuthUser } from "./../../../src/utils/firebase/firebase.utils";
@@ -26,7 +28,10 @@ const Nav = () => {
   //> using redux instead of context
   const currentUser = useSelector(selectCurrentUser)
 
-  const { cartDropdownOpen, setCartDropdownOpen } = useContext(CartContext);
+  // const { cartDropdownOpen, setCartDropdownOpen } = useContext(CartContext);
+  const cartDropdownOpen = useSelector(selectCartDropdownOpen)
+
+
   // console.log(currentUser);
 
   // const signOutAuthUserHandler = async () => {

@@ -1,12 +1,16 @@
-import { useContext } from 'react';
+// import { useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { CartContext } from '../../src/contexts/cart.context';
+// import { CartContext } from '../../src/contexts/cart.context';
 import Button from '../button/button.component';
 import CartItem from '../cart-item/cart-item.component'
 import {CartDropdownContainer, EmptyMessageContainer, CartItemsContainer} from './cart-dropdown.styles.jsx'
 
+import { useSelector } from 'react-redux';
+import { selectCartItems } from '../../src/store/cart/cart.selector.js';
+
 const CartDropdown = () => {
-    const { cartItems } = useContext(CartContext)
+    // const { cartItems } = useContext(CartContext)
+    const cartItems  = useSelector(selectCartItems)
 
     const navigate = useNavigate(); //> useNavigate is a hook which is used to navigate to a particular route
     const goToCheckout = () => {
