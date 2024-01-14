@@ -8,6 +8,8 @@ import logger from 'redux-logger'; //> allows us to see what the state looks lik
 
 import { rootReducer } from './root-reducer';
 
+import { thunk } from 'redux-thunk';
+
 
 import { persistStore, persistReducer } from 'redux-persist';
 import storage from 'redux-persist/lib/storage';
@@ -17,7 +19,9 @@ const persistConfig = {
 
     storage, //> storage is the actual storage object we are going to use from redux-persist/lib/storage which is local storage in our case
 
-    blacklist: ['user'] //> blacklist is an array containing the string names of any of the reducers that we want to exclude from being persisted
+    // blacklist: ['user'] //> blacklist is an array containing the string names of any of the reducers that we want to exclude from being persisted
+
+    whitelist: ['cart'] //> ulta of blacklist ... whitelist is an array containing the string names of any of the reducers that we want to persist
 }
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);
@@ -44,7 +48,7 @@ const persistedReducer = persistReducer(persistConfig, rootReducer);
 
 
 //? To only show logger when you are not in production mode
-const middleWares = [process.env.NODE_ENV !== 'production' && logger].filter(Boolean); //> middlewares runs before an action reaches the root reducer which helps us to catch the action and display it
+const middleWares = [process.env.NODE_ENV !== 'production' && logger, thunk].filter(Boolean); //> middlewares runs before an action reaches the root reducer which helps us to catch the action and display it
 
 //> And for middlewares to actually work we need to use applyMiddleware() function inside compose() function and pass it as a third argument to createStore() function
 
