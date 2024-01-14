@@ -3,7 +3,10 @@ import ReactDOM from 'react-dom/client'
 import { BrowserRouter } from 'react-router-dom' //> BrowserRouter keeps UI in sync with URL
 
 import { Provider } from 'react-redux' //> Provider is a component that we wrap around our application so that our application gets all the functionality of redux
-import { store } from './store/store.js'
+import { store, persistor } from './store/store.js'
+import { PersistGate } from 'redux-persist/integration/react'
+
+
 
 import App from './App.jsx'
 // import { UserProvider } from '../src/contexts/user.context.jsx'
@@ -14,15 +17,17 @@ import './index.scss'
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
   <Provider store={store}>
-    <BrowserRouter>
-      {/* <UserProvider> */}
-        {/* <CategoriesProvider> */}
-          {/* <CartProvider> */}
-            <App />
-          {/* </CartProvider> */}
-        {/* </CategoriesProvider> */}
-      {/* </UserProvider> */}
-    </BrowserRouter>
+    <PersistGate loading={null} persistor={persistor}>
+      <BrowserRouter>
+        {/* <UserProvider> */}
+          {/* <CategoriesProvider> */}
+            {/* <CartProvider> */}
+              <App />
+            {/* </CartProvider> */}
+          {/* </CategoriesProvider> */}
+        {/* </UserProvider> */}
+      </BrowserRouter>
+    </PersistGate>
   </Provider>
   </React.StrictMode>,
 )
