@@ -8,7 +8,10 @@ import logger from 'redux-logger'; //> allows us to see what the state looks lik
 
 import { rootReducer } from './root-reducer';
 
-import { thunk } from 'redux-thunk';
+// import { thunk } from 'redux-thunk'; //? using saga and can only 1 async middleware at a time
+import createSagaMiddleware from 'redux-saga';
+
+import { rootSaga } from './root-saga';
 
 
 import { persistStore, persistReducer } from 'redux-persist';
@@ -45,10 +48,10 @@ const persistedReducer = persistReducer(persistConfig, rootReducer);
 
 // const middleWaresbyUs = [loggerMiddleware];
 
-
+const sagaMiddleware = createSagaMiddleware();
 
 //? To only show logger when you are not in production mode
-const middleWares = [process.env.NODE_ENV !== 'production' && logger, thunk].filter(Boolean); //> middlewares runs before an action reaches the root reducer which helps us to catch the action and display it
+const middleWares = [process.env.NODE_ENV !== 'production' && logger, sagaMiddleware].filter(Boolean); //> middlewares runs before an action reaches the root reducer which helps us to catch the action and display it
 
 //> And for middlewares to actually work we need to use applyMiddleware() function inside compose() function and pass it as a third argument to createStore() function
 
@@ -64,6 +67,8 @@ export const store = createStore(persistedReducer, undefined, composeEnhancers)
 
 export const persistor = persistStore(store)
 
+
+sagaMiddleware.run(rootSaga); //> this line is used to run the root saga ... only after the store is created put this line
 
 //? createStore() function : The store is created by the createStore function. It lets you read the state via 'getState', dispatch actions via 'dispatch', and listen to state changes via 'subscribe' . It's important to note that you'll only have a single store in a Redux application. When you want to split your data handling logic, you'll use reducer composition instead of many stores.
 
