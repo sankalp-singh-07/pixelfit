@@ -2,6 +2,11 @@ import { useContext } from "react";
 import { UserContext } from "./../../../src/contexts/user.context.jsx";
 import { CartContext } from "../../../src/contexts/cart.context.jsx";
 
+
+//> For saga
+import { useDispatch } from "react-redux";
+import { signOutStart } from "../../../src/store/user/user.action.js";
+
 //? import data from redux
 import { useSelector } from "react-redux"; //> store is an object with many reducers and we can use useSelector hook to get the state from the store object ... we use selector function to get the state from the store object ... we pass the selector function to the useSelector hook and it returns the state from the store object ... we can use this hook multiple times to get different states from the store object
 
@@ -23,6 +28,10 @@ import CartIcon from "../../cart-icon/cart-icon.component.jsx";
 import CartDropdown from "../../cart-dropdown/cart-dropdown.component.jsx";
 
 const Nav = () => {
+
+  const dispatch = useDispatch();
+  const signOutAuthUser = () => dispatch(signOutStart());
+
   // const { currentUser } = useContext(UserContext);
 
   //> using redux instead of context
