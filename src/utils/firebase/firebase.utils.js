@@ -58,7 +58,10 @@ export const createUserDocumentFromAuth = async (userAuth, additionalInfo) => {
 	}
 
 	// if user does exist in firestore database then return userRef
-	return userRef;
+	// return userRef;
+
+	//> for saga
+	return userSnapshot;
 };
 
 
@@ -124,3 +127,12 @@ export const getCategoriesAndDocuments = async () => {
 	// return categoryMap;
 } 
 //> commenting the reduce so that we can get the array to store in redux
+
+export const getCurrentUser = () => {
+	return new Promise((resolve, reject) => {
+		const unsubscribe = onAuthStateChanged(auth, userAuth => {
+			unsubscribe();
+			resolve(userAuth);
+		}, reject)
+	})
+}

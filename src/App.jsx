@@ -5,7 +5,7 @@ import { Routes, Route } from "react-router-dom" //> Routes is a map of all the 
 import { useDispatch } from "react-redux"
 
 import { useEffect } from "react"
-import { onAuthStateChangedListener, createUserDocumentFromAuth } from './utils/firebase/firebase.utils'
+import { onAuthStateChangedListener, createUserDocumentFromAuth, getCurrentUser } from './utils/firebase/firebase.utils'
 import { setCurrentUser } from "./store/user/user.action"
 import { fetchCategoriesStart } from "./store/categories/category.action"
 
@@ -16,6 +16,7 @@ import Authentication from "../components/route/authentication/authentication.co
 import Shop from "../components/route/shop/shop.component"
 import Checkout from "../components/route/checkout/checkout.component"
 
+import { checkUserSession } from "./store/user/user.action"
 
 
 const App = () => {
@@ -23,11 +24,7 @@ const App = () => {
   const dispatch = useDispatch();
   
   useEffect(() => {
-      const unsubscribe = onAuthStateChangedListener((user) => {
-          if(user) createUserDocumentFromAuth(user);
-          dispatch(setCurrentUser(user));
-      });
-      return unsubscribe; 
+    dispatch(checkUserSession())
   }, []);
 
 //> set in shop component in the course(bcoz only its children needs it) but we set it here bcoz we want to provide it to everyone

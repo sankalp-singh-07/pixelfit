@@ -1,5 +1,8 @@
 import { useState, useContext } from 'react';
 
+import { useDispatch } from 'react-redux';
+import { googleSignInStart, emailSignInStart } from '../../src/store/user/user.action.js';
+
 import { signInWithGooglePopup } from '../../src/utils/firebase/firebase.utils.js';
 
 import Button, {BUTTON_TYPE_CLASSES} from '../button/button.component.jsx'
@@ -23,6 +26,8 @@ const SignInForm = () => {
 	const [userCredentials, setUserCredentials] = useState(dataFormsFields);
 	const {email, password} = userCredentials;
 
+	const dispatch = useDispatch();
+
 	const updateField = (e) => {
 		const {name, value} = e.target;
 		setUserCredentials({...userCredentials, [name]: value});
@@ -33,7 +38,9 @@ const SignInForm = () => {
 	}
 
 	const signInWithPopup = async () => {
-		await signInWithGooglePopup();
+		// await signInWithGooglePopup();
+		//> for saga
+		dispatch(googleSignInStart());
 	};
 
 	// const { setCurrentUser } = useContext(UserContext); //>Why context and why not provider : Because we need to access the setCurrentUser function in this component and we can't do that if we wrap this component in a provider. We can only access the currentUser and setCurrentUser properties in the children components of the provider component. So we use context here.
@@ -43,7 +50,10 @@ const SignInForm = () => {
 		e.preventDefault();
 
 		try {
-			const {user} = await signInAuthUserWithEmailAndPassword(email, password);
+			// const {user} = await signInAuthUserWithEmailAndPassword(email, password);
+			//> saga
+			dispatch(emailSignInStart(email, password));
+
 			resetForm();
 			// setCurrentUser(user);
 		} catch (error) {
