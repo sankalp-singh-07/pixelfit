@@ -10,13 +10,13 @@ const middleWares = [process.env.NODE_ENV !== 'production' && logger].filter(Boo
 
 export const store = configureStore({
     reducer: rootReducer,
-    // middleware: middleWares
+    middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(middleWares)
 })
 //> configureStore : accepts an object as an argument that has a reducer property pointing to root reducer and it returns a store object which we can use in our app ... can also add middlewares using "middleware" property which accepts array
 
 //? #NOTE => RTK comes with 3 default middlewares(thunk, Serializability Check Middleware, Immutable State Invariant) and if you add your own middlewares it will overwrite the default ones and you will lose them ... so it is usually recommended to add your own middlewares to the default ones by getting them and concating your own to them and then adding to the middleware property 
 
-
+//* NOTE : we can remove the non-serializable value error with 2 methods firstly by making the payload serializable (which we did in app.jsx) or by makingthe default Serializability Check Middleware value false by passing it as an object in the getDefaultMiddleware()
 
 
 

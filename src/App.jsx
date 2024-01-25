@@ -6,8 +6,10 @@ import { useDispatch } from "react-redux"
 
 import { useEffect } from "react"
 import { onAuthStateChangedListener, createUserDocumentFromAuth } from './utils/firebase/firebase.utils'
-import { setCurrentUser } from "./store/user/user.action"
 import { setCategories } from "./store/categories/category.action"
+
+// import { setCurrentUser } from "./store/user/user.action"
+import { setCurrentUser } from "./store/user/user.reducer" //> now we get it from user.reducer and everything remains same ... we get the action creator function which we need to reate before in a seperate file easily with createSlice() method
 
 
 import Nav from "../components/route/nav/nav.component"
@@ -25,7 +27,9 @@ const App = () => {
   useEffect(() => {
       const unsubscribe = onAuthStateChangedListener((user) => {
           if(user) createUserDocumentFromAuth(user);
-          dispatch(setCurrentUser(user));
+          const pickedUser = user && (({ accessToken, email }) => ({ accessToken, email }))(user); //? This is known as an Immediately Invoked Function Expression with "user" as its arguments
+          // console.log(setCurrentUser(pickedUser));
+          dispatch(setCurrentUser(pickedUser));
       });
       return unsubscribe; 
   }, []);
