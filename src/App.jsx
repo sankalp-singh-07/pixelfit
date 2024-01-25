@@ -6,7 +6,8 @@ import { useDispatch } from "react-redux"
 
 import { useEffect } from "react"
 import { onAuthStateChangedListener, createUserDocumentFromAuth } from './utils/firebase/firebase.utils'
-import { setCategories } from "./store/categories/category.action"
+// import { setCategories } from "./store/categories/category.action"
+import { setCategories } from "./store/categories/category.reducer"
 
 // import { setCurrentUser } from "./store/user/user.action"
 import { setCurrentUser } from "./store/user/user.reducer" //> now we get it from user.reducer and everything remains same ... we get the action creator function which we need to reate before in a seperate file easily with createSlice() method
