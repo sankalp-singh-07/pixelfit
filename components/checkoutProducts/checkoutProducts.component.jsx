@@ -6,7 +6,7 @@ import {CheckoutItemContainer, ImageContainer, NameContainer, QuantityContainer,
 
 import { useSelector, useDispatch } from 'react-redux';
 import { selectCartItems } from '../../src/store/cart/cart.selector.js';
-import { addItemToCart, removeItemFromCart, clearItemFromCart } from '../../src/store/cart/cart.action.js';
+import { addItemToCart, removeItemFromCart, clearItemFromCart } from '../../src/store/cart/cart.reducer.js';
 
 const CheckoutProducts = ({cartItem}) => {
     const {name,quantity,price, imageUrl} = cartItem;
@@ -14,11 +14,17 @@ const CheckoutProducts = ({cartItem}) => {
     // const {clearItemFromCart, addItemToCart, removeItemToCart} = useContext(CartContext);
 
     const dispatch = useDispatch();
-    const cartItems = useSelector(selectCartItems)
 
-    const clearTheItem = () => dispatch(clearItemFromCart(cartItems, cartItem));
-    const addTheItem = () => dispatch(addItemToCart(cartItems, cartItem));
-    const removeTheItem = () => dispatch(removeItemFromCart(cartItems, cartItem));
+    const clearTheItem = () => dispatch(clearItemFromCart(cartItem));
+    const addTheItem = () => dispatch(addItemToCart(cartItem));
+    const removeTheItem = () => dispatch(removeItemFromCart(cartItem));
+
+//> Before RTK
+    // const cartItems = useSelector(selectCartItems)
+
+    // const clearTheItem = () => dispatch(clearItemFromCart(cartItems, cartItem));
+    // const addTheItem = () => dispatch(addItemToCart(cartItems, cartItem));
+    // const removeTheItem = () => dispatch(removeItemFromCart(cartItems, cartItem));
 
     return(
         <CheckoutItemContainer>

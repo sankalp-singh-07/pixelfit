@@ -6,7 +6,7 @@ import ShoppingIcon from '../../src/assests/shopping-bag.svg'
 import { useSelector, useDispatch } from 'react-redux';
 
 import { selectCartCount, selectCartDropdownOpen } from '../../src/store/cart/cart.selector.js';
-import { setCartDropdownOpen } from '../../src/store/cart/cart.action.js';
+import { setCartDropdownOpen } from '../../src/store/cart/cart.reducer.js';
 
 const CartIcon = () => {
     // const { cartDropdownOpen, setCartDropdownOpen, cartIconCount } = useContext(CartContext);
