@@ -8,6 +8,8 @@ import { store } from './store/store.js'
 // import { PersistGate } from 'redux-persist/integration/react'
 
 
+import { Elements } from '@stripe/react-stripe-js'
+import { stripePromise } from './utils/stripe/stripe.utils.js'
 
 import App from './App.jsx'
 // import { UserProvider } from '../src/contexts/user.context.jsx'
@@ -23,7 +25,9 @@ ReactDOM.createRoot(document.getElementById('root')).render(
         {/* <UserProvider> */}
           {/* <CategoriesProvider> */}
             {/* <CartProvider> */}
-              <App />
+              <Elements stripe={stripePromise}>
+                <App />
+              </Elements>
             {/* </CartProvider> */}
           {/* </CategoriesProvider> */}
         {/* </UserProvider> */}
