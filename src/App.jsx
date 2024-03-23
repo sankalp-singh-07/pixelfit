@@ -68,3 +68,5 @@ export default App
 //? index in the nested route jo load hoga jab parent route hit hoga mtlb jab www.example.com/ hit hoga toh index route load hoga
 
 //? shop/* is a wildcard route which means that any route that starts with shop/ will load the shop component and the * is a placeholder for the route that comes after shop/ such as www.example.com/shop/hats will load the shop component ... we declare * placeholder in the route that is the parent of the route that we want to load such as in this case we want to load the shop component when the route www.example.com/shop/hats is hit so we declare the * placeholder in the parent route which is shop/ so that when the route www.example.com/shop/hats is hit the shop component is loaded
+
+//> NOTE- jab tak shop ya koi bhi page pe redirect nahi karoge/ load nhi karoge, uss page ke contents bhi load nahi honge that's why we need to load shop before hats for shop/*
