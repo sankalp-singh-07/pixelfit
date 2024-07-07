@@ -1,0 +1,20 @@
+{
+	"siteId": "d45abc53-4f24-4dd8-9095-eaf284c6b574",
+	"geolocation": {
+		"data": {
+			"city": "Mathura",
+			"country": {
+				"code": "IN",
+				"name": "India"
+			},
+			"subdivision": {
+				"code": "UP",
+				"name": "Uttar Pradesh"
+			},
+			"timezone": "Asia/Kolkata",
+			"latitude": 27.4987,
+			"longitude": 77.6669
+		},
+		"timestamp": 1706342355387
+	}
+}
