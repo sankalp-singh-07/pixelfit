@@ -1,6 +1,9 @@
 import { CATEGORIES_ACTION_TYPES, Category } from "./category.types";
 
 import { CategoryAction } from "./category.action";  //> using as keyword for this ... declaring that the action type can only be the 3 types described in the CategoryAction type otherwise throw error
+//? Problem with as - bcoz of this it will always be believed that the action belongs to the CategoryAction type and if we send an unrelated action it will lead to error ... also the default case has no use bcoz acc to typescript all the actions are already defined in the CategoryAction type
+
+
 
 export type CategoriesState = {
     readonly categories: Category[],

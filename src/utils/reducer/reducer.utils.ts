@@ -1,5 +1,25 @@
 import { AnyAction } from 'redux';  //? handle a wide range of actions without knowing their exact structure in advance
 
+
+type Matchable<AC extends () => AnyAction> = AC & {
+	type: ReturnType<AC>['type'];
+	match(action: AnyAction): action is ReturnType<AC>
+}
+
+export function withMatcher<AC extends () => AnyAction & {type : string}>(actionCreator : AC): Matchable<AC>
+
+export function withMatcher<AC extends (...args : any[]) => AnyAction & {type : string}>(actionCreator : AC): Matchable<AC>
+
+export function withMatcher(actionCreator : Function){
+	const type = actionCreator().type;
+	return Object.assign(actionCreator, {
+		type,
+		match(action: AnyAction){
+			return action.type === type;
+		}
+	})
+}
+
 export type ActionWithPayload<T, P> = {
 	type: T,
 	payload: P,
@@ -18,3 +38,33 @@ export function createAction<T extends string, P>(type:T, payload: P){
 } //> Actual implmentation of the function
 
 // export const createAction = (type, payload) => ({ type, payload }); //> this is a function that returns an action object with type and payload properties ... we will use this function to create action objects in our action creators
+
+
+
+//! Some extra stuffs
+
+//? Intersection types
+
+type Human = {
+	name: string,
+}
+
+type Alien = {
+	fly: () => void
+}
+
+type Hybrid = Human & Alien
+
+const a : Hybrid = {
+	name: 'Sankalp',
+	fly: () => {}
+} //> 'a' must satisfy both type Human and type Alien
+
+//> Note For Union Type (|) => It's like saying 'a' can be of type Human and type Alien
+
+
+//? ReturnType - specifies what type of value the function will return
+
+type Man = () => string;
+
+type MyFunc = ReturnType<Man> //> MyFunc will return string 
